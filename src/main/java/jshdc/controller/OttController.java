@@ -90,6 +90,44 @@ public class OttController {
         return resp;
     }
 
+    @RequestMapping(value = "/getContents")
+    public GetContentsResp getContents(@RequestBody(required = false) String json) {
+        GetContentsResp resp = new GetContentsResp();
+        String floorId;
+        String start;
+        int limit;
+        try {
+            Map<String, Object> map = jsonParser.parseMap(json);
+            floorId = (String) map.get("floorId");
+            start = (String) map.get("start");
+            limit = (int) map.get("limit");
+        } catch (Exception e) {
+            resp.result = 1;
+            resp.message = "lack parameter";
+            return resp;
+        }
+
+        List<Content> contents = new ArrayList<>();
+        for (int i = 0; i < limit; i++) {
+            Content content = new Content();
+            content.id = "id" + i;
+            content.name = "name " + i;
+            content.poster = "poster" + i;
+            content.type = "type " + i;
+            content.tableId = "tableId " + i;
+            content.view = "view " + i;
+            content.argument = "argument " + i;
+            content.element1 = "element1";
+            content.element2 = "element2";
+            contents.add(content);
+        }
+        resp.data = resp.new Data();
+        resp.data.contents = contents;
+        resp.result = 0;
+        resp.message = "success";
+        return resp;
+    }
+
     @RequestMapping(value = "/getChannelDetail")
     public GetChannelDetailResp getChannelDetail(@RequestBody(required = false) String json) {
         GetChannelDetailResp resp = new GetChannelDetailResp();
