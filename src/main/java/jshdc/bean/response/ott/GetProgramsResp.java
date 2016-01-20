@@ -1,31 +1,32 @@
 package jshdc.bean.response.ott;
 
-import jshdc.bean.Video;
+import jshdc.bean.Program;
+
+import java.util.List;
 
 /**
- * 获取视频详情
+ * 获取节目列表
  * Created by yinghuihong on 16/1/11.
  */
-public class GetVideoDetailResp {
-
+public class GetProgramsResp {
     public int result;
     public String message;
     public Data data;
 
     public class Data {
-        public Video video;
+        public List<Program> programs;
 
         @Override
         public String toString() {
             return "Data{" +
-                    "video=" + video +
+                    "programs=" + programs +
                     '}';
         }
     }
 
     @Override
     public String toString() {
-        return "GetVideoDetailResp{" +
+        return "GetProgramsResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
                 ", data=" + data +

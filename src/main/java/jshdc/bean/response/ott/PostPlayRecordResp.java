@@ -5,13 +5,14 @@ package jshdc.bean.response.ott;
  * Created by yinghuihong on 16/1/11.
  */
 public class PostPlayRecordResp {
-  public int result;
-  public String message;
+    public int result;
+    public String message;
 
-  @Override public String toString() {
-    return "PostPlayRecordResp{" +
-        "result=" + result +
-        ", message='" + message + '\'' +
-        '}';
-  }
+    @Override
+    public String toString() {
+        return "PostPlayRecordResp{" +
+                "result=" + result +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

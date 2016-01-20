@@ -6,8 +6,8 @@ package jshdc.bean;
  */
 public class Channel {
 
-  public String id;
-  public String name;
-  public String url;
-  public String description;
+    public String id;
+    public String name;
+    public String url;
+    public String description;
 }

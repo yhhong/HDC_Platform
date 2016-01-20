@@ -1,32 +1,36 @@
 package jshdc.bean;
 
+import java.util.List;
+
 /**
- * 内容
+ * 楼层
  * Created by yinghuihong on 16/1/8.
  */
-public class Content {
+public class Floor {
     public String id;
     public String name;
-    public String poster;
-    public String type;
-    public String tableId;
+    public String order;
+    public String displayType;
     public String view;
     public String argument;
     public String element1;
     public String element2;
+    public List<Content> contents;
+    public List<Message> messages;
 
     @Override
     public String toString() {
-        return "Content{" +
+        return "Floor{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", poster='" + poster + '\'' +
-                ", type='" + type + '\'' +
-                ", tableId='" + tableId + '\'' +
+                ", order='" + order + '\'' +
+                ", displayType='" + displayType + '\'' +
                 ", view='" + view + '\'' +
                 ", argument='" + argument + '\'' +
                 ", element1='" + element1 + '\'' +
                 ", element2='" + element2 + '\'' +
+                ", contents=" + contents +
+                ", messages=" + messages +
                 '}';
     }
 }

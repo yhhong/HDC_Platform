@@ -3,27 +3,30 @@ package jshdc.bean.response.ott;
 import jshdc.bean.Teleplay;
 
 /**
+ * 获取电视剧详情
  * Created by yinghuihong on 16/1/11.
  */
 public class GetTeleplayDetailResp {
-  public int result;
-  public String message;
-  public Data data;
+    public int result;
+    public String message;
+    public Data data;
 
-  public class Data {
-    public Teleplay teleplay;
+    public class Data {
+        public Teleplay teleplay;
 
-    @Override public String toString() {
-      return "Data{" +
-          "teleplay=" + teleplay +
-          '}';
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "teleplay=" + teleplay +
+                    '}';
+        }
     }
-  }
 
-  @Override public String toString() {
-    return "GetTeleplayDetailResp{" +
-        "result=" + result +
-        ", message='" + message + '\'' +
-        '}';
-  }
+    @Override
+    public String toString() {
+        return "GetTeleplayDetailResp{" +
+                "result=" + result +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

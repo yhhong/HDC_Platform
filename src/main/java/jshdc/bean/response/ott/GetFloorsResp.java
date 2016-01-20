@@ -1,31 +1,34 @@
 package jshdc.bean.response.ott;
 
-import jshdc.bean.Video;
+import jshdc.bean.Floor;
+
+import java.util.List;
 
 /**
- * 获取视频详情
  * Created by yinghuihong on 16/1/11.
  */
-public class GetVideoDetailResp {
+public class GetFloorsResp {
 
     public int result;
     public String message;
     public Data data;
 
     public class Data {
-        public Video video;
+        public long lastModifyTime;
+        public List<Floor> categories;
 
         @Override
         public String toString() {
             return "Data{" +
-                    "video=" + video +
+                    "lastModifyTime=" + lastModifyTime +
+                    ", categories=" + categories +
                     '}';
         }
     }
 
     @Override
     public String toString() {
-        return "GetVideoDetailResp{" +
+        return "GetFloorsResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
                 ", data=" + data +

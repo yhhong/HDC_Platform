@@ -6,9 +6,9 @@ package jshdc.bean;
  */
 public class Program {
 
-  public String id;
-  public String name;
-  public String showTime;
-  public String playType;
-  public String description;
+    public String id;
+    public String name;
+    public String showTime;
+    public String playType;
+    public String description;
 }

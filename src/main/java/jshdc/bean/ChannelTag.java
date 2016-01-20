@@ -5,13 +5,14 @@ package jshdc.bean;
  * Created by yinghuihong on 16/1/11.
  */
 public class ChannelTag {
-  public String id;
-  public String name;
+    public String id;
+    public String name;
 
-  @Override public String toString() {
-    return "ChannelTag{" +
-        "id='" + id + '\'' +
-        ", name='" + name + '\'' +
-        '}';
-  }
+    @Override
+    public String toString() {
+        return "ChannelTag{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
