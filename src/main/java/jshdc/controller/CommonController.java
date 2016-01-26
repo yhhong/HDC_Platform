@@ -1,6 +1,6 @@
 package jshdc.controller;
 
-import jshdc.bean.response.User;
+import jshdc.bean.User;
 import jshdc.bean.response.common.*;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.boot.json.JacksonJsonParser;

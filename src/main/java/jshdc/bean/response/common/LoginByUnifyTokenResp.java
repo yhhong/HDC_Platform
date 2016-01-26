@@ -1,6 +1,6 @@
 package jshdc.bean.response.common;
 
-import jshdc.bean.response.User;
+import jshdc.bean.User;
 
 /**
  * 全网统一认证登陆
