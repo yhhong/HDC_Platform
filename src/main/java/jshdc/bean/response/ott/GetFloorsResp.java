@@ -15,13 +15,13 @@ public class GetFloorsResp {
 
     public class Data {
         public long lastModifyTime;
-        public List<Floor> categories;
+        public List<Floor> floors;
 
         @Override
         public String toString() {
             return "Data{" +
                     "lastModifyTime=" + lastModifyTime +
-                    ", categories=" + categories +
+                    ", floors=" + floors +
                     '}';
         }
     }

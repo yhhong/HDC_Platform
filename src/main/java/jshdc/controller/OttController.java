@@ -84,7 +84,7 @@ public class OttController {
         }
         resp.data = resp.new Data();
         resp.data.lastModifyTime = System.currentTimeMillis();
-        resp.data.categories = categories;
+        resp.data.floors = categories;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -103,7 +103,7 @@ public class OttController {
             limit = (int) map.get("limit");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "lack parameter";
+            resp.message = "lack parameter: {floorId, start, limit}";
             return resp;
         }
 
@@ -137,7 +137,7 @@ public class OttController {
             channelId = (String) map.get("channelId");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "lack parameter";
+            resp.message = "lack parameter: {channelId}";
             return resp;
         }
 
@@ -159,7 +159,7 @@ public class OttController {
             programId = (String) map.get("programId");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {programId}";
             return resp;
         }
 
@@ -185,7 +185,7 @@ public class OttController {
             videoId = (String) map.get("videoId");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {videoId}";
             return resp;
         }
 
@@ -218,7 +218,7 @@ public class OttController {
             teleplayId = (String) map.get("teleplayId");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {teleplayId}";
             return resp;
         }
 
@@ -250,7 +250,7 @@ public class OttController {
             String teleplayId = (String) map.get("teleplayId");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {teleplayId}";
             return resp;
         }
 
@@ -415,7 +415,7 @@ public class OttController {
             String text = (String) map.get("text");
         } catch (Exception e) {
             resp.result = 0;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {text}";
             return resp;
         }
 
@@ -449,7 +449,7 @@ public class OttController {
             // save content
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {content}";
             return resp;
         }
         resp.result = 0;
@@ -466,7 +466,7 @@ public class OttController {
             String contentType = (String) map.get("contentType");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {tableId, contentType}";
             return resp;
         }
         resp.result = 0;
@@ -484,7 +484,7 @@ public class OttController {
             String contentType = (String) map.get("contentType");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak paramters";
+            resp.message = "leak parameters: {start, limit, contentType}";
             return resp;
         }
 
@@ -518,7 +518,7 @@ public class OttController {
             String time = (String) map.get("time");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {id, time}";
             return resp;
         }
         resp.result = 0;
@@ -535,7 +535,7 @@ public class OttController {
             String limit = (String) map.get("limit");
         } catch (Exception e) {
             resp.result = 1;
-            resp.message = "leak parameters";
+            resp.message = "leak parameters: {start, limit}";
             return resp;
         }
 
