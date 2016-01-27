@@ -12,25 +12,14 @@ public class GetRelevantRecommendResp {
 
     public int result;
     public String message;
-    public Data data;
-
-    public class Data {
-        public List<Content> contents;
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "contents=" + contents +
-                    '}';
-        }
-    }
+    public List<Content> contents;
 
     @Override
     public String toString() {
         return "GetRelevantRecommendResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
-                ", data=" + data +
+                ", contents=" + contents +
                 '}';
     }
 }

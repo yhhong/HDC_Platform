@@ -10,25 +10,14 @@ public class GetProgramDetailResp {
 
     public int result;
     public String message;
-    public Data data;
-
-    public class Data {
-        public Program program;
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "program=" + program +
-                    '}';
-        }
-    }
+    public Program program;
 
     @Override
     public String toString() {
         return "GetProgramDetailResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
-                ", data=" + data +
+                ", program=" + program +
                 '}';
     }
 }

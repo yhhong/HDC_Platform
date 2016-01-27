@@ -27,9 +27,7 @@ public class OttController {
             columns.add(column);
         }
         GetColumnsResp resp = new GetColumnsResp();
-        resp.data = resp.new Data();
-        resp.data.columns = columns;
-        resp.data.lastModifyTime = System.currentTimeMillis();
+        resp.columns = columns;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -38,32 +36,18 @@ public class OttController {
     @RequestMapping(value = "/getFloors")
     public GetFloorsResp getFloors(@RequestParam String userToken, @RequestParam String columnId) {
         GetFloorsResp resp = new GetFloorsResp();
-        List<Floor> categories = new ArrayList<>();
+        List<Floor> floors = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            Floor category = new Floor();
-            category.id = "id" + i;
-            category.name = "category " + i;
-            category.order = "order " + i;
-            category.displayType = "displayType " + i;
-            category.view = "view " + i;
-            category.argument = "argument " + i;
-            category.element1 = "element1";
-            category.element2 = "element2";
-            List<Content> contents = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
-                Content content = new Content();
-                content.id = "id" + j;
-                content.name = "name " + j;
-                content.poster = "poster" + j;
-                content.type = "type " + j;
-                content.tableId = "tableId " + j;
-                content.view = "view " + j;
-                content.argument = "argument " + j;
-                content.element1 = "element1";
-                content.element2 = "element2";
-                contents.add(content);
-            }
-            category.contents = contents;
+            Floor floor = new Floor();
+            floor.id = "id" + i;
+            floor.name = "category " + i;
+            floor.order = "order " + i;
+            floor.displayType = "displayType " + i;
+            floor.view = "view " + i;
+            floor.argument = "argument " + i;
+            floor.element1 = "element1";
+            floor.element2 = "element2";
+            floor.contents = generate();
             List<Message> messages = new ArrayList<>();
             for (int k = 0; k < 5; k++) {
                 Message message = new Message();
@@ -74,12 +58,10 @@ public class OttController {
                 message.content = "content" + k;
                 messages.add(message);
             }
-            category.messages = messages;
-            categories.add(category);
+            floor.messages = messages;
+            floors.add(floor);
         }
-        resp.data = resp.new Data();
-        resp.data.lastModifyTime = System.currentTimeMillis();
-        resp.data.floors = categories;
+        resp.floors = floors;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -90,22 +72,7 @@ public class OttController {
                                        @RequestParam(required = false, defaultValue = "0") int start,
                                        @RequestParam(required = false, defaultValue = "20") int limit) {
         GetContentsResp resp = new GetContentsResp();
-        List<Content> contents = new ArrayList<>();
-        for (int i = 0; i < limit; i++) {
-            Content content = new Content();
-            content.id = "id" + i;
-            content.name = "name " + i;
-            content.poster = "poster" + i;
-            content.type = "type " + i;
-            content.tableId = "tableId " + i;
-            content.view = "view " + i;
-            content.argument = "argument " + i;
-            content.element1 = "element1";
-            content.element2 = "element2";
-            contents.add(content);
-        }
-        resp.data = resp.new Data();
-        resp.data.contents = contents;
+        resp.contents = generate();
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -134,8 +101,7 @@ public class OttController {
         program.showTime = "12:00";
         program.playType = "";
         program.description = "channel " + programId;
-        resp.data = resp.new Data();
-        resp.data.program = program;
+        resp.program = program;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -147,7 +113,7 @@ public class OttController {
 
         Video video = new Video();
         video.id = "" + videoId;
-        video.playId = "";
+        video.playId = "http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4";
         video.name = "name" + videoId;
         video.poster = "";
         video.director = "";
@@ -157,8 +123,7 @@ public class OttController {
         video.showTime = "";
         video.playCount = "";
         video.time = "";
-        resp.data = resp.new Data();
-        resp.data.video = video;
+        resp.video = video;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -181,8 +146,7 @@ public class OttController {
         teleplay.playCount = "";
         teleplay.total = "";
         teleplay.updateCount = "";
-        resp.data = resp.new Data();
-        resp.data.teleplay = teleplay;
+        resp.teleplay = teleplay;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -208,8 +172,7 @@ public class OttController {
             video.time = "";
             videos.add(video);
         }
-        resp.data = resp.new Data();
-        resp.data.videos = videos;
+        resp.videos = videos;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -226,8 +189,7 @@ public class OttController {
             channelTag.name = "channel tag " + i;
             tags.add(channelTag);
         }
-        resp.data = resp.new Data();
-        resp.data.channelTags = tags;
+        resp.channelTags = tags;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -245,8 +207,7 @@ public class OttController {
             channel.description = "";
             channels.add(channel);
         }
-        resp.data = resp.new Data();
-        resp.data.channels = channels;
+        resp.channels = channels;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -265,8 +226,7 @@ public class OttController {
             program.description = "";
             programs.add(program);
         }
-        resp.data = resp.new Data();
-        resp.data.programs = programs;
+        resp.programs = programs;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -282,8 +242,7 @@ public class OttController {
             vodTag.name = "vod tag " + i;
             vodTags.add(vodTag);
         }
-        resp.data = resp.new Data();
-        resp.data.tags = vodTags;
+        resp.tags = vodTags;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -323,23 +282,7 @@ public class OttController {
     @RequestMapping(value = "/getRelevantRecommend")
     public GetRelevantRecommendResp getRelevantRecommend(@RequestParam String userToken) {
         GetRelevantRecommendResp resp = new GetRelevantRecommendResp();
-
-        List<Content> contents = new ArrayList<>();
-        for (int j = 0; j < 5; j++) {
-            Content content = new Content();
-            content.id = "id" + j;
-            content.name = "name " + j;
-            content.poster = "poster" + j;
-            content.type = "type " + j;
-            content.tableId = "tableId " + j;
-            content.view = "view " + j;
-            content.argument = "argument " + j;
-            content.element1 = "element1";
-            content.element2 = "element2";
-            contents.add(content);
-        }
-        resp.data = resp.new Data();
-        resp.data.contents = contents;
+        resp.contents = generate();
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -350,85 +293,77 @@ public class OttController {
                              @RequestParam(required = false, defaultValue = "0") int start,
                              @RequestParam(required = false, defaultValue = "20") int limit) {
         SearchResp resp = new SearchResp();
-
-        List<Content> contents = new ArrayList<>();
-        for (int j = 0; j < 5; j++) {
-            Content content = new Content();
-            content.id = "id" + j;
-            content.name = "name " + j;
-            content.poster = "poster" + j;
-            content.type = "type " + j;
-            content.tableId = "tableId " + j;
-            content.view = "view " + j;
-            content.argument = "argument " + j;
-            content.element1 = "element1";
-            content.element2 = "element2";
-            contents.add(content);
-        }
-        resp.data = resp.new Data();
-        resp.data.contents = contents;
+        resp.contents = generate();
+        ;
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
     @RequestMapping(value = "/postCollectVideo")
-    public PostCollectContentResp postCollectContent(@RequestParam String userToken, @RequestParam String videoId) {
-        PostCollectContentResp resp = new PostCollectContentResp();
+    public PostCollectVideoResp postCollectVideo(@RequestParam String userToken, @RequestParam String videoId) {
+        PostCollectVideoResp resp = new PostCollectVideoResp();
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
     @RequestMapping(value = "/deleteCollectVideo")
-    public DeleteCollectContentResp deleteCollectContent(@RequestParam String userToken, @RequestParam String videoId) {
-        DeleteCollectContentResp resp = new DeleteCollectContentResp();
+    public DeleteCollectVideoResp deleteCollectVideo(@RequestParam String userToken, @RequestParam String videoId) {
+        DeleteCollectVideoResp resp = new DeleteCollectVideoResp();
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
     @RequestMapping(value = "/getCollectVideos")
-    public GetCollectContentsResp getCollectContents(@RequestParam String userToken,
-                                                     @RequestParam(required = false, defaultValue = "0") int start,
-                                                     @RequestParam(required = false, defaultValue = "20") int limit) {
-        GetCollectContentsResp resp = new GetCollectContentsResp();
+    public GetCollectVideosResp getCollectVideos(@RequestParam String userToken,
+                                                 @RequestParam(required = false, defaultValue = "0") int start,
+                                                 @RequestParam(required = false, defaultValue = "20") int limit) {
+        GetCollectVideosResp resp = new GetCollectVideosResp();
 
-        List<Content> contents = new ArrayList<>();
+        List<Video> videos = new ArrayList<>();
         for (int j = 0; j < 5; j++) {
-            Content content = new Content();
-            content.id = "id" + j;
-            content.name = "name " + j;
-            content.poster = "poster" + j;
-            content.type = "type " + j;
-            content.tableId = "tableId " + j;
-            content.view = "view " + j;
-            content.argument = "argument " + j;
-            content.element1 = "element1";
-            content.element2 = "element2";
-            contents.add(content);
+            Video video = new Video();
+            video.id = "id" + j;
+            video.playId = "http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4";
+            video.name = "name " + j;
+            video.poster = "poster" + j;
+            video.director = "director " + j;
+            video.actors = "actors " + j;
+            video.description = "description " + j;
+            video.score = "score";
+            video.showTime = "showTime";
+            video.playCount = "99999";
+            video.time = "45:59";
+            videos.add(video);
         }
-        resp.data = resp.new Data();
-        resp.data.contents = contents;
+        resp.videos = videos;
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
     @RequestMapping(value = "/postVideoPlayRecord")
-    public PostPlayRecordResp postVideoPlayRecord(@RequestParam String userToken, @RequestParam String videoId, @RequestParam long breakpoint) {
-        PostPlayRecordResp resp = new PostPlayRecordResp();
+    public PostVideoPlayRecordResp postVideoPlayRecord(@RequestParam String userToken, @RequestParam String videoId, @RequestParam long breakpoint) {
+        PostVideoPlayRecordResp resp = new PostVideoPlayRecordResp();
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
     @RequestMapping(value = "/getVideoPlayRecords")
-    public GetPlayRecordsResp getVideoPlayRecords(@RequestParam String userToken,
-                                                  @RequestParam(required = false, defaultValue = "0") int start,
-                                                  @RequestParam(required = false, defaultValue = "20") int limit) {
-        GetPlayRecordsResp resp = new GetPlayRecordsResp();
+    public GetVideoPlayRecordsResp getVideoPlayRecords(@RequestParam String userToken,
+                                                       @RequestParam(required = false, defaultValue = "0") int start,
+                                                       @RequestParam(required = false, defaultValue = "20") int limit) {
+        GetVideoPlayRecordsResp resp = new GetVideoPlayRecordsResp();
+        resp.contents = generate();
+        resp.result = 0;
+        resp.message = "success";
+        return resp;
+    }
 
+    private List<Content> generate() {
         List<Content> contents = new ArrayList<>();
         for (int j = 0; j < 5; j++) {
             Content content = new Content();
@@ -443,11 +378,7 @@ public class OttController {
             content.element2 = "element2";
             contents.add(content);
         }
-        resp.data = resp.new Data();
-        resp.data.contents = contents;
-        resp.result = 0;
-        resp.message = "success";
-        return resp;
+        return contents;
     }
 
     //@RequestMapping(value = "/columns2", method = RequestMethod.POST) public GetColumnsResp columns(

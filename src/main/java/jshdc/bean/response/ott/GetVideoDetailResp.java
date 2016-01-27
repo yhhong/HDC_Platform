@@ -10,25 +10,14 @@ public class GetVideoDetailResp {
 
     public int result;
     public String message;
-    public Data data;
-
-    public class Data {
-        public Video video;
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "video=" + video +
-                    '}';
-        }
-    }
+    public Video video;
 
     @Override
     public String toString() {
         return "GetVideoDetailResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
-                ", data=" + data +
+                ", video=" + video +
                 '}';
     }
 }

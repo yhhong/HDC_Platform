@@ -12,24 +12,14 @@ public class GetChannelTagsResp {
 
     public int result;
     public String message;
-    public Data data;
-
-    public class Data {
-        public List<ChannelTag> channelTags;
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "channelTags=" + channelTags +
-                    '}';
-        }
-    }
+    public List<ChannelTag> channelTags;
 
     @Override
     public String toString() {
         return "GetChannelTagsResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
+                ", channelTags=" + channelTags +
                 '}';
     }
 }

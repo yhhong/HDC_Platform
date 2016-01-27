@@ -1,16 +1,16 @@
 package jshdc.bean.response.ott;
 
 /**
- * 播放记录新增
+ * 收藏
  * Created by yinghuihong on 16/1/11.
  */
-public class PostPlayRecordResp {
+public class PostCollectVideoResp {
     public int result;
     public String message;
 
     @Override
     public String toString() {
-        return "PostPlayRecordResp{" +
+        return "PostCollectVideoResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
                 '}';

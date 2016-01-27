@@ -40,8 +40,7 @@ public class CommonController {
         user.portrait = Pic.PIC1;
         user.userToken = "user_token_1";
 
-        resp.data = resp.new Data();
-        resp.data.user = user;
+        resp.user = user;
         resp.result = 0;
         resp.message = "success";
         return resp;
@@ -63,8 +62,7 @@ public class CommonController {
         user.portrait = Pic.PIC2;
         user.userToken = "user_token_2";
 
-        resp.data = resp.new Data();
-        resp.data.user = user;
+        resp.user = user;
         resp.result = 0;
         resp.message = "success";
         return resp;

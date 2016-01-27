@@ -11,27 +11,14 @@ public class GetFloorsResp {
 
     public int result;
     public String message;
-    public Data data;
-
-    public class Data {
-        public long lastModifyTime;
-        public List<Floor> floors;
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "lastModifyTime=" + lastModifyTime +
-                    ", floors=" + floors +
-                    '}';
-        }
-    }
+    public List<Floor> floors;
 
     @Override
     public String toString() {
         return "GetFloorsResp{" +
                 "result=" + result +
                 ", message='" + message + '\'' +
-                ", data=" + data +
+                ", floors=" + floors +
                 '}';
     }
 }
