@@ -2,15 +2,12 @@ package jshdc.controller;
 
 import jshdc.bean.*;
 import jshdc.bean.response.ott.*;
-import org.springframework.boot.json.JacksonJsonParser;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * OTT视频
@@ -19,10 +16,8 @@ import java.util.Map;
 @RestController
 public class OttController {
 
-    private JsonParser jsonParser = new JacksonJsonParser();
-
     @RequestMapping(value = "/getColumns")
-    public GetColumnsResp getColumns(@RequestBody(required = false) String json) {
+    public GetColumnsResp getColumns(@RequestParam String userToken) {
         List<Column> columns = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Column column = new Column();
@@ -41,7 +36,7 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getFloors")
-    public GetFloorsResp getFloors(@RequestBody(required = false) String json) {
+    public GetFloorsResp getFloors(@RequestParam String userToken, @RequestParam String columnId) {
         GetFloorsResp resp = new GetFloorsResp();
         List<Floor> categories = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -91,22 +86,10 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getContents")
-    public GetContentsResp getContents(@RequestBody(required = false) String json) {
+    public GetContentsResp getContents(@RequestParam String userToken, @RequestParam String floorId,
+                                       @RequestParam(required = false, defaultValue = "0") int start,
+                                       @RequestParam(required = false, defaultValue = "20") int limit) {
         GetContentsResp resp = new GetContentsResp();
-        String floorId;
-        String start;
-        int limit;
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            floorId = (String) map.get("floorId");
-            start = (String) map.get("start");
-            limit = (int) map.get("limit");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "lack parameter: {floorId, start, limit}";
-            return resp;
-        }
-
         List<Content> contents = new ArrayList<>();
         for (int i = 0; i < limit; i++) {
             Content content = new Content();
@@ -129,17 +112,8 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getChannelDetail")
-    public GetChannelDetailResp getChannelDetail(@RequestBody(required = false) String json) {
+    public GetChannelDetailResp getChannelDetail(@RequestParam String userToken, @RequestParam String channelId) {
         GetChannelDetailResp resp = new GetChannelDetailResp();
-        String channelId;
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            channelId = (String) map.get("channelId");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "lack parameter: {channelId}";
-            return resp;
-        }
 
         Channel channel = new Channel();
         channel.id = "" + channelId;
@@ -151,17 +125,8 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getProgramDetail")
-    public GetProgramDetailResp getProgramDetail(@RequestBody(required = false) String json) {
+    public GetProgramDetailResp getProgramDetail(@RequestParam String userToken, @RequestParam String programId) {
         GetProgramDetailResp resp = new GetProgramDetailResp();
-        String programId;
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            programId = (String) map.get("programId");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {programId}";
-            return resp;
-        }
 
         Program program = new Program();
         program.id = "" + programId;
@@ -177,17 +142,8 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getVideoDetail")
-    public GetVideoDetailResp getVideoDetail(@RequestBody(required = false) String json) {
+    public GetVideoDetailResp getVideoDetail(@RequestParam String userToken, @RequestParam String videoId) {
         GetVideoDetailResp resp = new GetVideoDetailResp();
-        String videoId;
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            videoId = (String) map.get("videoId");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {videoId}";
-            return resp;
-        }
 
         Video video = new Video();
         video.id = "" + videoId;
@@ -209,18 +165,9 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getTeleplayDetail")
-    public GetTeleplayDetailResp getTeleplayDetail(@RequestBody(required = false) String json) {
+    public GetTeleplayDetailResp getTeleplayDetail(@RequestParam String userToken, @RequestParam String teleplayId) {
 
         GetTeleplayDetailResp resp = new GetTeleplayDetailResp();
-        String teleplayId;
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            teleplayId = (String) map.get("teleplayId");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {teleplayId}";
-            return resp;
-        }
 
         Teleplay teleplay = new Teleplay();
         teleplay.id = "" + teleplayId;
@@ -242,17 +189,8 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getTeleplayVideos")
-    public GetTeleplayVideosResp getTeleplayVideos(@RequestBody(required = false) String json) {
+    public GetTeleplayVideosResp getTeleplayVideos(@RequestParam String userToken, @RequestParam String teleplayId) {
         GetTeleplayVideosResp resp = new GetTeleplayVideosResp();
-        try {
-
-            Map<String, Object> map = jsonParser.parseMap(json);
-            String teleplayId = (String) map.get("teleplayId");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {teleplayId}";
-            return resp;
-        }
 
         List<Video> videos = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -278,7 +216,7 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getChannelTags")
-    public GetChannelTagsResp getChannelTags(@RequestBody(required = false) String json) {
+    public GetChannelTagsResp getChannelTags(@RequestParam String userToken) {
 
         GetChannelTagsResp resp = new GetChannelTagsResp();
         List<ChannelTag> tags = new ArrayList<>();
@@ -296,7 +234,7 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getChannels")
-    public GetChannelsResp getChannels(@RequestBody(required = false) String json) {
+    public GetChannelsResp getChannels(@RequestParam String userToken) {
         GetChannelsResp resp = new GetChannelsResp();
         List<Channel> channels = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -315,7 +253,7 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getChannelPrograms")
-    public GetProgramsResp getChannelPrograms(@RequestBody(required = false) String json) {
+    public GetProgramsResp getChannelPrograms(@RequestParam String userToken) {
         GetProgramsResp resp = new GetProgramsResp();
         List<Program> programs = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -335,7 +273,7 @@ public class OttController {
     }
 
     @RequestMapping(value = "/getVodTags")
-    public GetVodTagsResp getVodTags(@RequestBody(required = false) String json) {
+    public GetVodTagsResp getVodTags(@RequestParam String userToken) {
         GetVodTagsResp resp = new GetVodTagsResp();
         List<VodTag> vodTags = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -383,7 +321,7 @@ public class OttController {
 //  }
 
     @RequestMapping(value = "/getRelevantRecommend")
-    public GetRelevantRecommendResp getRelevantRecommend(@RequestBody(required = false) String json) {
+    public GetRelevantRecommendResp getRelevantRecommend(@RequestParam String userToken) {
         GetRelevantRecommendResp resp = new GetRelevantRecommendResp();
 
         List<Content> contents = new ArrayList<>();
@@ -408,16 +346,10 @@ public class OttController {
     }
 
     @RequestMapping(value = "/search")
-    public SearchResp search(@RequestBody(required = false) String json) {
+    public SearchResp search(@RequestParam String userToken, @RequestParam String text,
+                             @RequestParam(required = false, defaultValue = "0") int start,
+                             @RequestParam(required = false, defaultValue = "20") int limit) {
         SearchResp resp = new SearchResp();
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            String text = (String) map.get("text");
-        } catch (Exception e) {
-            resp.result = 0;
-            resp.message = "leak parameters: {text}";
-            return resp;
-        }
 
         List<Content> contents = new ArrayList<>();
         for (int j = 0; j < 5; j++) {
@@ -440,53 +372,27 @@ public class OttController {
         return resp;
     }
 
-    @RequestMapping(value = "/postCollectContent")
-    public PostCollectContentResp postCollectContent(@RequestBody(required = false) String json) {
+    @RequestMapping(value = "/postCollectVideo")
+    public PostCollectContentResp postCollectContent(@RequestParam String userToken, @RequestParam String videoId) {
         PostCollectContentResp resp = new PostCollectContentResp();
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            Content content = (Content) map.get("content");
-            // save content
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {content}";
-            return resp;
-        }
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
-    @RequestMapping(value = "/deleteCollectContent")
-    public DeleteCollectContentResp deleteCollectContent(@RequestBody(required = false) String json) {
+    @RequestMapping(value = "/deleteCollectVideo")
+    public DeleteCollectContentResp deleteCollectContent(@RequestParam String userToken, @RequestParam String videoId) {
         DeleteCollectContentResp resp = new DeleteCollectContentResp();
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            String tableId = (String) map.get("tableId");
-            String contentType = (String) map.get("contentType");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {tableId, contentType}";
-            return resp;
-        }
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
-    @RequestMapping(value = "/getCollectContents")
-    public GetCollectContentsResp getCollectContents(@RequestBody(required = false) String json) {
+    @RequestMapping(value = "/getCollectVideos")
+    public GetCollectContentsResp getCollectContents(@RequestParam String userToken,
+                                                     @RequestParam(required = false, defaultValue = "0") int start,
+                                                     @RequestParam(required = false, defaultValue = "20") int limit) {
         GetCollectContentsResp resp = new GetCollectContentsResp();
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            String start = (String) map.get("start");
-            String limit = (String) map.get("limit");
-            String contentType = (String) map.get("contentType");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {start, limit, contentType}";
-            return resp;
-        }
 
         List<Content> contents = new ArrayList<>();
         for (int j = 0; j < 5; j++) {
@@ -509,35 +415,19 @@ public class OttController {
         return resp;
     }
 
-    @RequestMapping(value = "/postPlayRecord")
-    public PostPlayRecordResp postPlayRecord(@RequestBody(required = false) String json) {
+    @RequestMapping(value = "/postVideoPlayRecord")
+    public PostPlayRecordResp postVideoPlayRecord(@RequestParam String userToken, @RequestParam String videoId, @RequestParam long breakpoint) {
         PostPlayRecordResp resp = new PostPlayRecordResp();
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            String id = (String) map.get("id");
-            String time = (String) map.get("time");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {id, time}";
-            return resp;
-        }
         resp.result = 0;
         resp.message = "success";
         return resp;
     }
 
-    @RequestMapping(value = "/getPlayRecords")
-    public GetPlayRecordsResp getPlayRecords(@RequestBody(required = false) String json) {
+    @RequestMapping(value = "/getVideoPlayRecords")
+    public GetPlayRecordsResp getVideoPlayRecords(@RequestParam String userToken,
+                                                  @RequestParam(required = false, defaultValue = "0") int start,
+                                                  @RequestParam(required = false, defaultValue = "20") int limit) {
         GetPlayRecordsResp resp = new GetPlayRecordsResp();
-        try {
-            Map<String, Object> map = jsonParser.parseMap(json);
-            String start = (String) map.get("start");
-            String limit = (String) map.get("limit");
-        } catch (Exception e) {
-            resp.result = 1;
-            resp.message = "leak parameters: {start, limit}";
-            return resp;
-        }
 
         List<Content> contents = new ArrayList<>();
         for (int j = 0; j < 5; j++) {
